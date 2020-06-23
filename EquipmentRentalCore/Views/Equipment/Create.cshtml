@@ -1,0 +1,37 @@
+﻿@model EquipmentRentalCore.Models.EquipmentViewModels.ManageEquipmentModel
+
+@{
+    ViewData["Title"] = "Add a new equipment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EquipmentName" class="control-label"></label>
+                <input asp-for="EquipmentName" class="form-control" />
+                <span asp-validation-for="EquipmentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentTypeList" class="control-label"></label>
+                <select asp-for="EquipmentTypeId" asp-items="@Model.EquipmentTypeList" class="form-control"></select>
+                <span asp-validation-for="EquipmentTypeList" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategorList" class="control-label"></label>
+                <select asp-for="CategorID" asp-items="@Model.CategorList" class="form-control"></select>
+                <span asp-validation-for="CategorList" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a asp-controller="Equipment" asp-action="Index" class="btn btn-danger">Anuluj</a>
+            </div>
+        </form>
+    </div>
+</div>
+

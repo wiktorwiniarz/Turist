@@ -1,0 +1,56 @@
+﻿@model EquipmentRentalCore.Models.AccountViewModels.ManageUserViewModel
+@{
+    ViewData["Title"] = "Manage your account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <h4>Zarządzaj kontem</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Id" hidden />
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                @Model.Username
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GroupList"></label>
+                <ul>
+                    @foreach (var item in Model.GroupList)
+                    {
+                        <li>@item.GroupName</li>
+                    }
+                </ul>
+            </div>
+            <div>
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#ChangePasswordModal"><span class="glyphicon glyphicon-lock"></span> Change your password</button>
+                <hr />
+                <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                <a asp-area="" asp-action="Index" asp-controller="Home" class="btn btn-sm btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="ChangePasswordModal" role="dialog">
+    <div class="modal-dialog">
+        @await Html.PartialAsync("EditPassword")
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

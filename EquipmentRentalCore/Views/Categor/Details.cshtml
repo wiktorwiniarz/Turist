@@ -1,0 +1,51 @@
+﻿@model EquipmentRentalCore.Models.CategorViewModels.ListCategorsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="container">
+    <div class="row">
+        <h3>Categor <strong>@Model.CategorName</strong>Szczegóły</h3>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="CategorName" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                @Html.DisplayFor(model => model.CategorName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="EquipmentAttachedList" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                <ul>
+                    @if (Model.EquipmentAttachedList.Count > 0)
+                    {
+                        for (var i = 0; i < Model.EquipmentAttachedList.Count; i++)
+                        {
+                            <li style="list-style-type:none;"><a asp-action="Details" asp-controller="Equipment" asp-route-id="@Model.EquipmentAttachedList[i].EquipmentID">@Model.EquipmentAttachedList[i].EquipmentName</a></li>
+                        }
+                    }
+                    else
+                    {
+                <li>
+                    Brak sprzętu umieszczonego w tej kategorii
+                </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <a class="btn btn-sm btn-info" asp-action="Index">Powrót do listy z kategoriami</a>
+    </div>
+    <br />
+</div>
+

@@ -1,0 +1,62 @@
+﻿@model EquipmentRentalCore.Models.EquipmentViewModels.EquipmentListModel
+
+@{
+    ViewData["Title"] = "Equipment "+ @Model.EquipmentName + " details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="container">
+    <div class="row">
+        <h3>Sprzęt <strong>@Model.EquipmentName</strong> Szczegóły</h3>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="EquipmentName" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                @Model.EquipmentName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="EquipmentTypeText" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                <a asp-action="Details" asp-controller="EquipmentType" asp-route-id="@Model.EquipmentTypeID">@Model.EquipmentTypeText</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="CategorName" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                <a asp-action="Details" asp-controller="Categor" asp-route-id="@Model.CategorID">@Model.CategorName</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="IsRented" class="control-label"></label>
+            </div>
+            @if (Model.IsRented)
+            {
+                <div class="col-xs-8">
+                    <a asp-action="Details" asp-controller="Rental" asp-route-id="@Model.RentID">Tak</a>
+                </div>
+            }
+            else
+            {
+                <div class="col-xs-8">
+                    No <a asp-action="Rent" asp-controller="Rental" asp-route-id="@Model.Id" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Rent</a>
+                </div>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <a class="btn btn-sm btn-info" asp-action="Index">Wróć do listy narzędzi</a>
+    </div>
+    <br />
+</div>
+

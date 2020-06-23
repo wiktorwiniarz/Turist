@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180120104308_Roles.cs" />
+    <Compile Remove="Migrations\20180120104308_Roles.Designer.cs" />
+    <Compile Remove="Migrations\20180120105420_Roles2.cs" />
+    <Compile Remove="Migrations\20180120105420_Roles2.Designer.cs" />
+    <Compile Remove="Migrations\20180120112052_Roles3.cs" />
+    <Compile Remove="Migrations\20180120112052_Roles3.Designer.cs" />
+    <Compile Remove="Migrations\20180120122601_RolesFinal.cs" />
+    <Compile Remove="Migrations\20180120122601_RolesFinal.Designer.cs" />
+    <Compile Remove="Migrations\20180120123103_Rolesds.cs" />
+    <Compile Remove="Migrations\20180120123103_Rolesds.Designer.cs" />
+    <Compile Remove="Migrations\20180120125107_UserGroupsAdd.cs" />
+    <Compile Remove="Migrations\20180120125107_UserGroupsAdd.Designer.cs" />
+    <Compile Remove="Migrations\20180120125304_UserGroupsAdd2.cs" />
+    <Compile Remove="Migrations\20180120125304_UserGroupsAdd2.Designer.cs" />
+    <Compile Remove="Migrations\20180120125356_UserGroupsAdd3.cs" />
+    <Compile Remove="Migrations\20180120125356_UserGroupsAdd3.Designer.cs" />
+    <Compile Remove="Migrations\20180120125424_UserGroupsAdd2.cs" />
+    <Compile Remove="Migrations\20180120125424_UserGroupsAdd2.Designer.cs" />
+    <Compile Remove="Migrations\20180120125932_UserGroupsAdd.cs" />
+    <Compile Remove="Migrations\20180120125932_UserGroupsAdd.Designer.cs" />
+    <Compile Remove="Migrations\20180120130449_UserGroupsAdd2.cs" />
+    <Compile Remove="Migrations\20180120130449_UserGroupsAdd2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images1\" />
+  </ItemGroup>
+
+</Project>

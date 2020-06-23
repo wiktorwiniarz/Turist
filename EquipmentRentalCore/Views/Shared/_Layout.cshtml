@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Wypożyczalnia Turystyczna</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://kit.fontawesome.com/4f181a5240.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap&subset=latin-ext" rel="stylesheet">
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Wypożyczalnia turystyczna</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Rental" asp-action="Index">Wypożyczenia</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-original-title title>Sprzęt</a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="Equipment" asp-action="Index">Sprzęt</a></li>
+                            <li><a asp-area="" asp-controller="EquipmentType" asp-action="Index">Typ sprzętu</a></li>
+                            <li><a asp-area="" asp-controller="Categor" asp-action="Index">Kategorie</a></li>
+                        </ul>
+                    </li>
+                    <li><a asp-area="" asp-controller="Group" asp-action="Index">Groups</a></li>
+                </ul>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Logowanie</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Register">Rejestracja</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <form method="post" asp-controller="Account" asp-action="Logout">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="btn navbar-btn navbar-link">Witaj - @User.Identity.Name</li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Manage">Zarządzaj kontem</a></li>
+                            <li><input class="btn btn-link navbar-btn navbar-link" style="text-decoration:none;" type="submit" value="Logout" /> </li>
+                        </ul>
+                    </form>
+                }
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="container d-flex justify-content-end">
+                <div class="container d-flex justify-content-lg-start">
+                    <a class="pull-left"> <p>&copy; @DateTime.Now.Year - Wypożyczalnia Turystyczna Wiktor Winiarz</p></a>
+                </div>
+                <a class="pull-right" href="www.facebook.com">
+                    <i class="fab fa-facebook-f fa-fw"></i>
+                </a>
+                <a class="pull-right" href="www.twitter.com">
+                    <i class="fab fa-twitter fa-fw"></i>
+                </a>
+                <a class="pull-right" href="www.linkedin.com">
+                    <i class="fab fa-linkedin-in fa-fw"></i>
+                </a>
+            </div>
+
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

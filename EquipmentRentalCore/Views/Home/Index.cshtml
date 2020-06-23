@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Witamy w systemie wypożyczalni!</h2>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-title text-center">
+                    <div class="panel-heading">Rent an equipment</div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-xs-12 text-center">
+                        <a asp-action="Rent" asp-controller="Rental" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-calendar"></span> Rent</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-title text-center">
+                    <div class="panel-heading">Zobacz wszystkie wynajmy w systemie</div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-xs-12 text-center">
+                        <a asp-action="Index" asp-controller="Rental" class="btn btn-lg btn-success"><span class="label label-default">@ViewData["CountRentals"]</span> Rentals</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-title text-center">
+                    <div class="panel-heading">Zobacz wszystkie dostępne urządzenia</div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-xs-12 text-center">
+                        <a asp-action="Index" asp-controller="Equipment" class="btn btn-lg btn-success"><span class="label label-default">@ViewData["CountEquipments"]</span> Equipments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-title text-center">
+                    <div class="panel-heading">Szukaj narzędzia po typie</div>
+                </div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchEquipmentTypeText" placeholder="Type name" />
+                        <span class="input-group-btn">
+                            <button onclick="javascript:SearchEquipmentType()" class="btn btn-success"><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-title text-center">
+                    <div class="panel-heading">Szukaj narzędzi po kategorii</div>
+                </div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchEquipmentCategorText" placeholder="Categor name" />
+                        <span class="input-group-btn">
+                            <button onclick="javascript:SearchEquipmentCategor()" class="btn btn-success"><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-title text-center">
+                    <div class="panel-heading">Wyszukaj wynajmy według nazwy użytkownika lub nazwiska</div>
+                </div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchRentalUserText" placeholder="User data (ie. First name or surname)" />
+                        <span class="input-group-btn">
+                            <button onclick="javascript:SearchRentalUser()" class="btn btn-success"><i class="glyphicon glyphicon-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function SearchRentalUser() {
+        var url = '@Url.Action("Index", "Rental", new { data = "__text__" })';
+        window.location.href = url.replace('__text__', $("#searchRentalUserText").val());
+    }
+    function SearchEquipmentType() {
+        var url = '@Url.Action("Index", "EquipmentType", new { data = "__text__" })';
+        window.location.href = url.replace('__text__', $("#searchEquipmentTypeText").val());
+    }
+    function SearchEquipmentCategor() {
+        var url = '@Url.Action("Index", "Categor", new { data = "__text__" })';
+        window.location.href = url.replace('__text__', $("#searchEquipmentCategorText").val());
+    }
+</script>

@@ -1,0 +1,97 @@
+﻿@model EquipmentRentalCore.Models.RentViewModels.RentListModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="container">
+    <div class="row">
+        <h3>Rental for equipment <strong>@Model.EquipmentName</strong>Szczegóły</h3>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="RentStartDate" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                @Html.DisplayFor(model => model.RentStartDate)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="RentEndDate" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                @Html.DisplayFor(model => model.RentEndDate)
+                <p>(@((Model.RentEndDate.Date - DateTime.Today.Date).Days) days left)</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="RentedByUser" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                @Model.RentedByUser
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="EquipmentName" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                <a asp-action="Details" asp-controller="Equipment" asp-route-id="@Model.EquipmentID">@Model.EquipmentName</a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <td>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Service"))
+            {
+                <a class="btn btn-sm btn-default" data-target="#ProlongationModal" data-toggle="modal" onclick="javascript:ToggleProlongModal(@Model.RentID)"><span class="glyphicon glyphicon-time"></span> Prolong</a>
+                <a class="btn btn-sm btn-primary" data-target="#ConfirmDeleteModal" data-toggle="modal" onclick="javascript:ToggleConfirmRetrievalModal(@Model.RentID)"><span class="glyphicon glyphicon-arrow-down"></span> Confirm retrieval</a>
+            }
+        </td>
+        <a class="btn btn-sm btn-info" asp-action="Index">Wróć do wypożyczeń</a>
+    </div>
+    <br />
+</div>
+<div class="modal fade" id="ProlongationModal">
+    <div class="modal-dialog">
+        <div id="prolongContent">
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ConfirmDeleteModal">
+    <div class="modal-dialog">
+        <div id="confirmDeleteModalContent"></div>
+    </div>
+</div>
+<script>
+    function ToggleProlongModal(rentId) {
+        $.ajax({
+            url: "@Url.Action("_ProlongRentalModal", "Rental")",
+            type: "GET",
+            data: { id : rentId },
+            success: function (result) {
+                $("#prolongContent").html(result);
+                $("#ProlongationModal").modal('show');
+            }
+        });
+    }
+    function ToggleConfirmRetrievalModal(rentId) {
+        $.ajax({
+            url: "@Url.Action("_ConfirmDeleteModal", "Rental")",
+            type: "GET",
+            data: { id : rentId },
+            success: function (result) {
+                $("#confirmDeleteModalContent").html(result);
+                $("#ConfirmDeleteModal").modal('show');
+            }
+        });
+    }
+</script>
+

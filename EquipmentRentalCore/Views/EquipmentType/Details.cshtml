@@ -1,0 +1,43 @@
+﻿@model EquipmentRentalCore.Models.EquipmentTypeViewModel.ListEquipmentTypeViewModel
+
+@{
+    ViewData["Title"] = "Equipment type " + @Model.Name + " details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="container">
+    <div class="row">
+        <h3>Equipment <strong>@Model.Name</strong> details</h3>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="Name" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                @Model.Name
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <label asp-for="EquipmentsAttachedList" class="control-label"></label>
+            </div>
+            <div class="col-xs-8">
+                <ul>
+                    @for (var i = 0; i < Model.EquipmentsAttachedList.Count; i++)
+                    {
+                        <li><a asp-action="Details" asp-controller="Equipment" asp-route-id="@Model.EquipmentsAttachedList[i].EquipmentID">@Model.EquipmentsAttachedList[i].EquipmentName</a></li>
+                    }
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <a class="btn btn-sm btn-info" asp-action="Index">Back to list of equipment types</a>
+    </div>
+    <br />
+</div>
+

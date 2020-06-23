@@ -1,0 +1,23 @@
+﻿@model EquipmentRentalCore.Models.GroupModels.RolesViewModel
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Dodaj użytkownika do tej grupy</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-area="" asp-controller="Group" asp-action="_AddUserToRole" method="post">
+                    <input hidden asp-for="RoleID" />
+                    <div class="form-group">
+                        <label asp-for="ChooseAdditionalUserList" class="control-label"></label>
+                        <select asp-items="@Model.ChooseAdditionalUserList" asp-for="ChosenListID" class="form-control"></select>
+                        <span asp-validation-for="ChooseAdditionalUserList" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Zapisz</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
